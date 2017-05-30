@@ -16,13 +16,13 @@
 
 ```
 
-a.Automated deployment and configuration
+a.自动部署和配置
 
-b.Customizable Monitoring and reporting
+b.可以定制监控和报告
 
-c.Effortless, robust troubleshooting
+c.强大的故障诊断、排除功能
 
-d.Zero downtime maintenance
+d.最重要的就是零停机维护功能
 
 ```
 > 
