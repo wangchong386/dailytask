@@ -1,7 +1,7 @@
 # 向新集群中添加数据节点（Cloudera Manager）
 ## 操作步骤：
 ### 一、修改 hostname
-1.修改新节点的 /etc/sysconfig/network 配置文件，按照集群节点命名规范更新HOSTNAME：
+1. 修改新节点的 /etc/sysconfig/network 配置文件，按照集群节点命名规范更新HOSTNAME：
 
 系统默认的：（将localhost按照需要的命名规则进行修改）
 
@@ -21,7 +21,7 @@ Broadcast message from root@localhost.localdomain
 The system is going down for reboot NOW!
 
 ```
-3.增加新节点的ip和hosename映射
+3. 增加新节点的ip和hosename映射
 /etc/hosts
 增加新节点的ip和hostname映射，并用namenode的hosts文件覆盖新节点和已有节点，保持整个集群hosts文件同步
 （__目前该操作暂时手工完成__）
@@ -31,22 +31,32 @@ The system is going down for reboot NOW!
 ```
 
 ### 二、安装jdk （也可以不适用手动安装，在CDH中自动安装）
-当前集群使用的jdk版本为：Oracle jdk-7u55-linux-x64
-部署位置为：
-/usr/local/jdk1.7.0_55
-/usr/local/jdk
-其中/usr/local/jdk 为符号链（文件软链接），指向同级目录jdk1.7.0_55文件夹
+当前集群使用的jdk版本为：`Oracle jdk-7u55-linux-x64`
 
-1.获取jdk tar包（可从其他节点拷贝）：
-`# scp jdk-7u55-linux-x64.tar.gz root@新节点的IP:/usr/local/``
-2.将jdk tar包解压到 /usr/local/ 目录下：
+部署位置为：
+
+`/usr/local/jdk1.7.0_55`
+
+`/usr/local/jdk`
+
+其中`/usr/local/jdk` 为符号链（文件软链接），指向同级目录jdk1.7.0_55文件夹
+
+1. 获取jdk tar包（可从其他节点拷贝）：
+2. 
+`# scp jdk-7u55-linux-x64.tar.gz root@新节点的IP:/usr/local/`
+
+2. 将jdk tar包解压到 /usr/local/ 目录下：
+
 `# cd /usr/local/`
+
 `# tar -xzvf jdk-7u55-linux-x64.tar.gz`
-3.创建jdk符号链：
+
+3. 创建jdk符号链：
 `# cd /usr/local/`
+
 `# ln -s jdk1.7.0_55/ jdk`
 
-4.配置java环境变量 
+4. 配置java环境变量 
 在 `/etc/profile` 配置文件末尾添加：
 ```
 export JAVA_HOME=/usr/local/jdk
@@ -55,9 +65,13 @@ export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
 export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH
 ```
 Source该profile文件，使新配置的java环境变量生效：
+
 `# source /etc/profile`
+
 验证环境变量配置，并核对java版本：
+
 `# java -version`
+
 输出：
 ```
 java version "1.7.0_55"
