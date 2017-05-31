@@ -177,11 +177,14 @@ openssh-daemon (pid  2766) is running...
 浏览器访问以下地址进入Cloudera Manager界面：
 
 `http://hostname:7180/cmf/home`
-> 1.点击进入“hosts”标签，点击“Add New Hosts to Cluster”按钮进入新增节点向导 
+#### 1.点击进入“hosts”标签，点击“Add New Hosts to Cluster”按钮进入新增节点向导 
 ![](images/addhosts1.png)
 
 ![](images/addhost2.png)
 
-> 2.填写待新增节点的IP地址，并且点击“Search”后CM提示检测到新节点，然后点击继续“Continue”
+#### 2.填写待新增节点的IP地址，并且点击“Search”后CM提示检测到新节点，然后点击继续“Continue”
 
 ![](images/addhost3.png)
+
+#### 3.选择安装与CM Server版本一致的agent：“Matched release for this Cloudera Manager Server”，并继续
+![](images/addhost4.png)
