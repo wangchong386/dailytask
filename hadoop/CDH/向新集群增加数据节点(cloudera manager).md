@@ -184,3 +184,4 @@ openssh-daemon (pid  2766) is running...
 
 > 2.填写待新增节点的IP地址，并且点击“Search”后CM提示检测到新节点，然后点击继续“Continue”
 
+![](images/addhosts3.png)
