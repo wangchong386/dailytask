@@ -30,6 +30,32 @@ The system is going down for reboot NOW!
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 ```
 
+4. ssh免密码登录设置
+```
+[root@hostname ~]# ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa):
+Created directory '/root/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /root/.ssh/id_rsa.
+Your public key has been saved in /root/.ssh/id_rsa.pub.
+The key fingerprint is:
+6b:3e:fb:fb:78:3d:77:e7:32:9b:40:47:38:77:bd:ad root@hostname
+The key's randomart image is:
++--[ RSA 2048]----+
+|                 |
+|             .  .|
+|            o o o|
+|             + .o|
+|        S   . ...|
+|         . . . . |
+|        o   ..E  |
+|       o.  ...=.+|
+|        o+++. oB+|
++-----------------+
+
+```
 ### 二、安装jdk （也可以不适用手动安装，在CDH中自动安装）
 当前集群使用的jdk版本为：`Oracle jdk-7u55-linux-x64`
 
