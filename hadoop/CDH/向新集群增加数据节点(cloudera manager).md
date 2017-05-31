@@ -175,3 +175,8 @@ openssh-server-5.3p1-117.el6.x86_64
 openssh-daemon (pid  2766) is running...
 ```
 浏览器访问以下地址进入Cloudera Manager界面：
+
+`http://hostname:7180/cmf/home`
+> 1.点击进入“hosts”标签，点击“Add New Hosts to Cluster”按钮进入新增节点向导 
+
+/images/add hosts1.png
