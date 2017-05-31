@@ -3,9 +3,12 @@
 一、修改 hostname
 1.修改新节点的 /etc/sysconfig/network 配置文件，按照集群节点命名规范更新HOSTNAME：
 
-系统默认的：
+系统默认的：（将localhost按照需要的命名规则进行修改）
+
 ```
+
 NETWORKING=yes
 
 HOSTNAME=localhost.localdomain
+
 ```
