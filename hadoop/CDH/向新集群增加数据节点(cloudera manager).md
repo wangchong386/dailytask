@@ -15,12 +15,9 @@ HOSTNAME=localhost.localdomain
 2. 重启节点使HOSTNAME生效
 
 ```
-
 [root@localhost ~]# reboot
-
 Broadcast message from root@localhost.localdomain
         (/dev/pts/0) at 11:53 ...
-
 The system is going down for reboot NOW!
 
 ```
