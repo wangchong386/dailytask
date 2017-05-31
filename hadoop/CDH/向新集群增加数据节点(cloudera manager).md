@@ -21,3 +21,10 @@ Broadcast message from root@localhost.localdomain
 The system is going down for reboot NOW!
 
 ```
+3.更新/etc/hosts 文件
+增加新节点的ip和hostname映射，并用namenode的hosts文件覆盖新节点和已有节点，保持整个集群hosts文件同步
+（__目前该操作暂时手工完成__）
+```
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+```
