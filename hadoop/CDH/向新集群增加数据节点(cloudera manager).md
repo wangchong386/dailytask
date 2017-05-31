@@ -31,6 +31,8 @@ The system is going down for reboot NOW!
 ```
 
 4. ssh免密码登录设置
+#### 第一步：先在本地机器上使用ssh-keygen产生公钥私钥对
+
 ```
 [root@hostname ~]# ssh-keygen
 Generating public/private rsa key pair.
@@ -54,6 +56,22 @@ The key's randomart image is:
 |       o.  ...=.+|
 |        o+++. oB+|
 +-----------------+
+
+```
+
+#### 第二步：将本机的公钥复制到远程机器的`authorized_keys`文件中，`ssh-copy-id`也能让你有到远程机器的`home, ~./ssh` , 和 `~/.ssh/authorized_keys`的权利
+```
+[root@d1-kafka1 .ssh]# ssh-copy-id -i ~/.ssh/id_rsa.pub root@d1-namenode1
+The authenticity of host 'd1-namenode1 (172.21.150.11)' can't be established.
+RSA key fingerprint is 23:1c:e4:23:5b:80:1c:af:bd:3d:c1:59:c5:c3:48:c5.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'hostname,xxx.xxx.xxx.xxx' (RSA) to the list of known hosts.
+root@hostname's password:
+Now try logging into the machine, with "ssh 'root@d1-namenode1'", and check in:
+
+  .ssh/authorized_keys
+
+to make sure we haven't added extra keys that you weren't expecting.
 
 ```
 ### 二、安装jdk （也可以不适用手动安装，在CDH中自动安装）
