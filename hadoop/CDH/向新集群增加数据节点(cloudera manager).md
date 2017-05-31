@@ -78,3 +78,36 @@ java version "1.7.0_55"
 Java(TM) SE Runtime Environment (build 1.7.0_55-b13)
 Java HotSpot(TM) 64-Bit Server VM (build 24.55-b03, mixed mode)
 ```
+
+### 三、使用Cloudera Manager Web界面添加新节点
+使用Cloudera Manager添加新节点需确保新节点能够访问互联网：
+`# ping www.baidu.com`
+
+但是出现：
+```
+
+`#` ping baidu.com
+
+ping: unknown host baidu.com
+
+```
+> the host is unknow，可以断定是DNS的设置有问题。网上搜索也说这个错误的原因99%是/etc/resolv.conf中的DNS配置错误，或者没有这个配置
+于是编辑 /etc/resolv.conf
+添加了两行（DNS地址是咨询了服务器运营商得知的）
+`nameserver 202.106.0.20`
+`nameserver 8.8.8.8`
+再执行`service network restart`重启网络服务即可
+
+```
+[root@hostname ~]# service network restart
+Shutting down interface bond0:                             [  OK  ]
+Shutting down loopback interface:                          [  OK  ]
+Bringing up loopback interface:                            [  OK  ]
+Bringing up interface bond0:  Determining if ip address 172.xxx.xxx.xxx is already in use for device bond0...
+                                                           [  OK  ]
+
+```
+
+新节点ssh服务需开启，默认监听端口22
+
+浏览器访问以下地址进入Cloudera Manager界面：
