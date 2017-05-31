@@ -156,5 +156,22 @@ Bringing up interface bond0:  Determining if ip address 172.xxx.xxx.xxx is alrea
 ```
 
 新节点ssh服务需开启，默认监听端口22
+(1) 登陆linux系统，打开终端命令。输入 rpm -qa |grep ssh 查找当前系统是否已经安装
 
+```
+[root@hostname ~]#  rpm -qa |grep ssh
+libssh2-1.4.2-2.el6_7.1.x86_64
+openssh-clients-5.3p1-117.el6.x86_64
+openssh-5.3p1-117.el6.x86_64
+openssh-server-5.3p1-117.el6.x86_64
+```
+(2) 如果没有安装SSH软件包，可以通过yum  或rpm安装包进行安装
+
+`yum install ssh`
+
+(3) 查看ssh是否正在运行：
+```
+[root@hostname ~]# service sshd status
+openssh-daemon (pid  2766) is running...
+```
 浏览器访问以下地址进入Cloudera Manager界面：
