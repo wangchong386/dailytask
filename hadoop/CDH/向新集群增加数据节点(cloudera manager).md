@@ -1,0 +1,11 @@
+# 向新集群中添加数据节点（Cloudera Manager）
+## 操作步骤：
+一、修改 hostname
+1.修改新节点的 /etc/sysconfig/network 配置文件，按照集群节点命名规范更新HOSTNAME：
+
+系统默认的：
+```
+NETWORKING=yes
+
+HOSTNAME=localhost.localdomain
+```
