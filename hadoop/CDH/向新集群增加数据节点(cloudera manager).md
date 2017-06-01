@@ -188,3 +188,6 @@ openssh-daemon (pid  2766) is running...
 
 #### 3.选择安装与CM Server版本一致的agent：“Matched release for this Cloudera Manager Server”，并继续
 ![](images/addhost4.png)
+#### 4.集群节点统一使用root用户。填写root用户密码，以便CM通过SSH完成剩余安装
+![](images/addhost5.png)
+#### 5.Cloudera Manager会自动完成新节点的安装并激活
