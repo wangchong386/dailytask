@@ -178,7 +178,7 @@ openssh-daemon (pid  2766) is running...
 
 `http://hostname:7180/cmf/home`
 #### 1.点击进入“hosts”标签，点击“Add New Hosts to Cluster”按钮进入新增节点向导 
-![](images/addhosts1.png)
+![](images/addhost1.png)
 
 ![](images/addhost2.png)
 
