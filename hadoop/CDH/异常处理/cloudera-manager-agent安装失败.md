@@ -96,3 +96,22 @@ Nothing to do
 `yum remove httpd-2.2.21-1.x86_64`
 然后在进行安装就可以：
 `yum install httpd-2.2.15-39.el6.centos.x86_64`
+
+#### (2) __glibc-common版本不匹配__
+```
+Error: Package: glibc-2.12-1.149.el6_6.7.i686 (updates_source)
+           Requires: glibc-common = 2.12-1.149.el6_6.7
+           Installed: glibc-common-2.12-1.192.el6.x86_64 (@anaconda-CentOS-201605220104.x86_64/6.8)
+               glibc-common = 2.12-1.192.el6
+           Available: glibc-common-2.12-1.149.el6.x86_64 (base_source)
+               glibc-common = 2.12-1.149.el6
+           Available: glibc-common-2.12-1.149.el6_6.4.x86_64 (updates_source)
+               glibc-common = 2.12-1.149.el6_6.4
+           Available: glibc-common-2.12-1.149.el6_6.5.x86_64 (updates_source)
+               glibc-common = 2.12-1.149.el6_6.5
+           Available: glibc-common-2.12-1.149.el6_6.7.x86_64 (updates_source)
+               glibc-common = 2.12-1.149.el6_6.7
+ You could try using --skip-broken to work around the problem
+ You could try running: rpm -Va --nofiles --nodigest
+
+```
