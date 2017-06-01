@@ -77,3 +77,22 @@ httpd.x86_64                                                                  2.
 Available Packages
 httpd.x86_64                                                                  2.2.21-1                                                                               extra_source
 ```
+> 3.如果安装httpd的话，显示已经安装
+```
+[root@localhost ~]# yum install httpd-2.2.15-39.el6.centos
+Loaded plugins: fastestmirror
+Setting up Install Process
+Repository base_source is listed more than once in the configuration
+Repository epel_server is listed more than once in the configuration
+Repository updates_source is listed more than once in the configuration
+Repository extra_source is listed more than once in the configuration
+Loading mirror speeds from cached hostfile
+Package matching httpd-2.2.15-39.el6.centos.x86_64 already installed. Checking for update.
+Nothing to do
+
+``` 
+ 
+可以通过命令将httpd程序删除之后，重新安装
+`yum remove httpd-2.2.21-1.x86_64`
+然后在进行安装就可以：
+`yum install httpd-2.2.15-39.el6.centos.x86_64`
