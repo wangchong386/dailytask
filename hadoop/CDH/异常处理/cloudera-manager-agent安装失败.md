@@ -23,6 +23,7 @@ httpd.x86_64                                                                    
 ```
 
 * 解决措施：
+> 1.安装httpd2.2.15版本
 ```
 [root@hostname ~]# yum install httpd-2.2.15-39.el6.centos.x86_64
 Loaded plugins: fastestmirror
@@ -60,4 +61,19 @@ Installing for dependencies:
  httpd-tools                                x86_64                              2.2.15-39.el6.centos                              base_source                               75 k
  mailcap                                    noarch                              2.1.31-2.el6                                      base_source                               27 k
 
+```
+> 2.查看是否已经安装
+
+```
+[root@hostname ~]# yum list httpd
+Loaded plugins: fastestmirror
+Repository base_source is listed more than once in the configuration
+Repository epel_server is listed more than once in the configuration
+Repository updates_source is listed more than once in the configuration
+Repository extra_source is listed more than once in the configuration
+Loading mirror speeds from cached hostfile
+Installed Packages
+httpd.x86_64                                                                  2.2.15-39.el6.centos                                                                   @base_source
+Available Packages
+httpd.x86_64                                                                  2.2.21-1                                                                               extra_source
 ```
