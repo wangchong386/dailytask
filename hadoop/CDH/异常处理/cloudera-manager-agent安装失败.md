@@ -98,6 +98,8 @@ Nothing to do
 `yum install httpd-2.2.15-39.el6.centos.x86_64`
 
 #### (2) __glibc-common版本不匹配__
+##### 首先可以看下glibc是什么以及它的重要性：
+> glibc是GNU发布的libc库，即c运行库。glibc是linux系统中最底层的api，几乎其它任何运行库都会依赖于glibc。glibc除了封装linux操作系统所提供的系统服务外，它本身也提供了许多其它一些必要功能服务的实现。由于 glibc 囊括了几乎所有的 UNIX 通行的标准，可以想见其内容包罗万象。而就像其他的 UNIX 系统一样，其内含的档案群分散于系统的树状目录结构中，像一个支架一般撑起整个操作系统。在 GNU/Linux 系统中，其C函式库发展史点出了GNU/Linux 演进的几个重要里程碑，用 glibc 作为系统的C函式库，是GNU/Linux演进的一个重要里程碑。
 ```
 Error: Package: glibc-2.12-1.149.el6_6.7.i686 (updates_source)
            Requires: glibc-common = 2.12-1.149.el6_6.7
