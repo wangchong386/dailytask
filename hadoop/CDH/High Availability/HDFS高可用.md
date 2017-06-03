@@ -26,15 +26,38 @@ Minimum Required Role: Cluster Administrator (also provided by Full Administrato
 * `Update the Hive Metastore NameNode`.
 Cloudera Manager ensures that one NameNode is active, and saves the namespace. Then it stops the standby NameNode, creates a SecondaryNameNode, removes the standby NameNode role, and restarts all the HDFS services.
 ————————————————————————————————————————————————————————————————————————————————————————————
+## 1.配置HDFS的高可用性
 ![](images/HA3.png)
 ![](images/HA4.png)
 我们建议将JournalNodes托管在名称节点类似的硬件规格的机器上。 NameNodes和ResourceManager的主机通常是很好的选择。 您必须至少有三个和奇数的JournalNodes。
 ![](images/HA5.png)
 ![](images/HA6.png)
+
 这个就保持默认，然后继续时出现问题
+
 ![](images/HA7.png)
 返回，写个值
 ![](images/HA8.png)
+![](images/HA9.png)
+完成此向导后必须执行以下手动步骤：
+将HFS服务的HDFS Web Interface角色配置为HFS作为HTTPFS角色而不是NameNode。文档
+对于每个Hive服务Hive，停止Hive服务，将Hive Metastore数据库备份到持久存储，运行服务命令“Update Hive Metastore NameNodes”，然后重新启动Hive服务。
+————————————————————————————————————————————————————————————————————————————————————————————
+## 2.配置CDH其他组件使用HDFS高可用性
+
+配置Hive Metastore、Hue、Impala等CDH组件使用HDFS 高可用性。
+
+### 2.1 配置Hive Metastore使用HDFS高可用性
+
+1. 在Cloudera Manager中，进入Hive Service
+
+2. 点击Actions > Stop，如果Hue和Impala服务正在运行，需要先将其停止
+3. 当Hive服务停止以后，请先备份Hive Metastore的数据，即将元数据从MySQL（PostgreSQL或Oracle）库中导出到一个安全目录
+![](images/HA10.png)
+4. 选择 Actions > Update Hive Metastore NameNodes并点击Confirm按钮确认。如下图所示
+![](images/HA11.png)
+![](images/HA12.png)
+5. 点击Actions > Start，如果Hue和Impala服务已停止，需要先将其启动
 ————————————————————————————————————————————————————————————————————————————————————————————
 
 ![](images/HA1.png)
