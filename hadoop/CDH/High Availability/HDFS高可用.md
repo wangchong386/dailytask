@@ -25,6 +25,17 @@ Minimum Required Role: Cluster Administrator (also provided by Full Administrato
 * Confirm that you want to take this action.
 * `Update the Hive Metastore NameNode`.
 Cloudera Manager ensures that one NameNode is active, and saves the namespace. Then it stops the standby NameNode, creates a SecondaryNameNode, removes the standby NameNode role, and restarts all the HDFS services.
+————————————————————————————————————————————————————————————————————————————————————————————
+![](images/HA3.png)
+![](images/HA4.png)
+我们建议将JournalNodes托管在名称节点类似的硬件规格的机器上。 NameNodes和ResourceManager的主机通常是很好的选择。 您必须至少有三个和奇数的JournalNodes。
+![](images/HA5.png)
+![](images/HA6.png)
+这个就保持默认，然后继续时出现问题
+![](images/HA7.png)
+返回，写个值
+![](images/HA8.png)
+————————————————————————————————————————————————————————————————————————————————————————————
 
 ![](images/HA1.png)
 ### 介绍一下几个role的作用：
@@ -33,3 +44,14 @@ Cloudera Manager ensures that one NameNode is active, and saves the namespace. T
 1. 两个NameNode为了数据同步，会通过一组称作JournalNodes的独立进程进行相互通信。当active状态的NameNode的命名空间有任何修改时，会告知大部分的JournalNodes进程。standby状态的NameNode有能力读取JNs中的变更信息，并且一直监控edit log的变化，把变化应用于自己的命名空间。standby可以确保在集群出错时，命名空间状态已经完全同步了。
 2. 集群启动时，可以同时启动2个NameNode。这些NameNode只有一个是active的，另一个属于standby状态。active状态意味着提供服务，standby状态意味着处于休眠状态，只进行数据同步，时刻准备着提供服务。如下所示：
 ![](images/HA2.png)
+```
+对于HA集群而言，确保同一时刻只有一个NameNode处于active状态是至关重要的。否则，两个NameNode的数据状态就会产生分歧，可能丢失数据，或者产生错误的结果。为了保证这点，JNs必须确保同一时刻只有一个NameNode可以向自己写数据
+```
+3. 硬件资源：
+为了部署HA集群，应该准备以下事情：
+
+* NameNode服务器：运行NameNode的服务器应该有相同的硬件配置。
+
+* JournalNode服务器：运行的JournalNode进程非常轻量，可以部署在其他的服务器上。注意：必须允许至少3个节点。当然可以运行更多，但是必须是奇数个，如3、5、7、9个等等。当运行N个节点时，系统可以容忍至少(N-1)/2(N至少为3)个节点失败而不影响正常运行。 
+
+在HA集群中，standby状态的NameNode可以完成checkpoint操作，因此没必要配置Secondary NameNode、CheckpointNode、BackupNode。如果真的配置了，还会报错。
