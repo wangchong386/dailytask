@@ -59,6 +59,16 @@ Cloudera Manager ensures that one NameNode is active, and saves the namespace. T
 ![](images/HA12.png)
 5. 点击Actions > Start，如果Hue和Impala服务已停止，需要先将其启动
 ————————————————————————————————————————————————————————————————————————————————————————————
+## 3.配置Hue使用HDFS高可用性
+1. 在Cloudera Manager中，进入HDFS Service
+2. 进入Instances标签页面，点击Add Role Instances按钮
+3. 点击HttpFS角色下面文本框选择主机，并点击OK按钮
+4. 点击Continue按钮
+5. 返回Instances页面，选择HttpFS角色，并点击Start启动服务
+6. HttpFS服务启动后，点击进入Hue Service > Configuration页面
+7. 找到Service-Wide > HDFS Web Interface Role属性，选中httpfs单选框
+8. 点击Save Changes按钮保存修改并重启Hue服务
+————————————————————————————————————————————————————————————————————————————————————————————
 
 ![](images/HA1.png)
 ### 介绍一下几个role的作用：
