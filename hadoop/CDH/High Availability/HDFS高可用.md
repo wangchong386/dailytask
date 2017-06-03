@@ -15,3 +15,21 @@
 ```
 __重要提示__:需要具体了解如何自动故障切换可以访问以下地址：`https://www.cloudera.com/documentation/enterprise/5-5-x/topics/cdh_hag_hdfs_ha_intro.html`
 
+Disabling and Redeploying HDFS HA Using Cloudera Manager
+Minimum Required Role: Cluster Administrator (also provided by Full Administrator)
+
+* Go to the HDFS service.
+* Select `Actions` > `Disable High Availability`.
+* Select the hosts for the NameNode and the SecondaryNameNode and click `Continue`.
+* Select the HDFS checkpoint directory and click Continue.
+* Confirm that you want to take this action.
+* `Update the Hive Metastore NameNode`.
+Cloudera Manager ensures that one NameNode is active, and saves the namespace. Then it stops the standby NameNode, creates a SecondaryNameNode, removes the standby NameNode role, and restarts all the HDFS services.
+
+![](images/HA1.png)
+### 介绍一下几个role的作用：
+* JournalNode
+
+1. 两个NameNode为了数据同步，会通过一组称作JournalNodes的独立进程进行相互通信。当active状态的NameNode的命名空间有任何修改时，会告知大部分的JournalNodes进程。standby状态的NameNode有能力读取JNs中的变更信息，并且一直监控edit log的变化，把变化应用于自己的命名空间。standby可以确保在集群出错时，命名空间状态已经完全同步了。
+2. 集群启动时，可以同时启动2个NameNode。这些NameNode只有一个是active的，另一个属于standby状态。active状态意味着提供服务，standby状态意味着处于休眠状态，只进行数据同步，时刻准备着提供服务。如下所示：
+![](images/HA2.png)
