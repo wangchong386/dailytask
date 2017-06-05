@@ -102,3 +102,6 @@ tier1.sinks.sink1.hdfs.rollCount = 0
 tier1.sinks.sink1.hdfs.fileType = DataStream
 tier1.sinks.sink1.channel = channel1
 ```
+* 下表介绍了Kafka sink支持的参数。 必需的属性以粗体显示。
+![](images/kafka13.png)
+![](images/kafka14.png)
