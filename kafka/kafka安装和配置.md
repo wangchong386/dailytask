@@ -1,10 +1,12 @@
-## 谈谈kafka
-### 总览
-> Cloudera分发Apache Kafka是一种分布式提交日志服务。 kafka功能非常像发布/订阅消息传递系统，但具有更好的吞吐量，内置的分区，复制和容错能力。 kafka是大规模消息处理应用的理想解决方案。 它经常与Apache Hadoop，Apache Storm和Spark Streaming一起使用。
-
-kafka可以提供的是：
-
-使用O（1）磁盘结构进行持久消息传递，这意味着Kafka算法的执行时间与输入的大小无关。 执行时间是恒定的，即使有太字节的存储消息。
-高吞吐量，每秒支持数十万条消息，即使是适度的硬件。
-明确支持通过Kafka服务器分区消息。 它在维护消息流的顺序的同时在消费者机器群集上分配消费。
-支持并行数据加载到Hadoop中。
+## kafka安装
+### kafka安装
+* 这步很简单，先是在parcels下载本地源，然后下载，分发，安装并激活一系列手动页面操作。
+![](images/kafka5.png)
+* 然后添加服务
+![](images/kafka6.png)
+等等按顺序操作。即可安装成功：
+![](images/kafka7.png)
+CDH kafka安装很简单也很方便，所以就大概说下
+### kafka需要注意：
+* kafka broker的平稳关闭
+如果kafka broker没有正常关闭，则后续的重启可能需要比预期更多的时间。当broker花费超过30秒钟的时间，在停止Kafka服务，停止Kafka broker角色或停止运行Kafka服务的集群时，可能会发生这种情况。 kafka broker也被关闭，作为升级的一部分。 您可以设置两个配置属性来控制Cloudera Manager是否等待broker平稳地关闭：
