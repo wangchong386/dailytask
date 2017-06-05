@@ -36,3 +36,29 @@ tier1.sources  = source1
 * 为了更高的吞吐量，配置多kafka sources从相同的topic读取，如果你配置所有的source使用相同的groupId,topic包含多分区。每个源从不同的分区集读取数据，从而提高摄取速度。
 * 下表介绍了Kafka source支持的参数。 必需的属性以粗体显示。
 ![](images/kafka11.png)
+* 调整注意：
+
+1. auto.commit.enable is set to false by the source, and every batch is committed. For improved performance, set this to true using the kafka.auto.commit.enable setting. This can lead to data loss if the source goes down before committing.
+2. consumer.timeout.ms is set to 10, so when Flume polls Kafka for new data, it waits no more than 10 ms for the data to be available. Setting this to a higher value can reduce CPU utilization due to less frequent polling, but introduces latency in writing batches to the channel.
+
+### Kafka Sink
+> Flume configuration example uses a Kafka sink with an exec source:
+```
+ tier1.sources  = source1
+ tier1.channels = channel1
+ tier1.sinks = sink1
+ 
+ tier1.sources.source1.type = exec
+ tier1.sources.source1.command = /usr/bin/vmstat 1
+ tier1.sources.source1.channels = channel1
+ 
+ tier1.channels.channel1.type = memory
+ tier1.channels.channel1.capacity = 10000
+ tier1.channels.channel1.transactionCapacity = 1000
+ 
+ tier1.sinks.sink1.type = org.apache.flume.sink.kafka.KafkaSink
+ tier1.sinks.sink1.topic = sink1
+ tier1.sinks.sink1.brokerList = kafka01.example.com:9092,kafka02.example.com:9092
+ tier1.sinks.sink1.channel = channel1
+ tier1.sinks.sink1.batchSize = 20
+```
