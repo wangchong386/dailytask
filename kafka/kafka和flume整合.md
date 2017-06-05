@@ -71,3 +71,34 @@ tier1.sources  = source1
 * 没有使用source，直接从kafka写到hadoop
 * 直接从Flume source写入Kafka，无需额外的缓冲(buffering)。
 * 作为任何source/sink组合的可靠且高可用性的channel。
+
+The following Flume configuration uses a Kafka channel with an exec source and hdfs sink:
+
+```
+tier1.sources = source1
+tier1.channels = channel1
+tier1.sinks = sink1
+
+tier1.sources.source1.type = exec
+tier1.sources.source1.command = /usr/bin/vmstat 1
+tier1.sources.source1.channels = channel1
+
+tier1.channels.channel1.type = org.apache.flume.channel.kafka.KafkaChannel
+tier1.channels.channel1.capacity = 10000
+tier1.channels.channel1.zookeeperConnect = zk01.example.com:2181
+tier1.channels.channel1.parseAsFlumeEvent = false
+tier1.channels.channel1.topic = channel2
+tier1.channels.channel1.consumer.group.id = channel2-grp
+tier1.channels.channel1.auto.offset.reset = earliest
+tier1.channels.channel1.bootstrap.servers = kafka02.example.com:9092,kafka03.example.com:9092
+tier1.channels.channel1.transactionCapacity = 1000
+tier1.channels.channel1.kafka.consumer.max.partition.fetch.bytes=2097152
+
+tier1.sinks.sink1.type = hdfs
+tier1.sinks.sink1.hdfs.path = /tmp/kafka/channel
+tier1.sinks.sink1.hdfs.rollInterval = 5
+tier1.sinks.sink1.hdfs.rollSize = 0
+tier1.sinks.sink1.hdfs.rollCount = 0
+tier1.sinks.sink1.hdfs.fileType = DataStream
+tier1.sinks.sink1.channel = channel1
+```
