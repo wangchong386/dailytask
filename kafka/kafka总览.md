@@ -21,3 +21,7 @@ kafka可以提供的是：
 
 * 每一个kafka集群中有一个broker扮演的是controller,controller负责管理partition和replicas(副本)的状态。它还执行管理任务，如重新分配分区。
 ![](images/kafka4.png)
+
+
+### Cloudera分布的Apache Kafka版本和包装信息
+https://www.cloudera.com/documentation/kafka/latest/topics/kafka_packaging.html
