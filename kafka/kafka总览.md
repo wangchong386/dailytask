@@ -8,3 +8,8 @@ kafka可以提供的是：
 * 高吞吐量，每秒支持数十万条消息，即使是适度的硬件。
 * 明确支持通过Kafka服务器分区消息。 它在维护消息流的顺序的同时在消费者机器群集上分配消费。
 * 支持并行数据加载到Hadoop中。
+
+### 说一下kafka中的专业术语:
+
+> 服务是在CDH群集中运行的应用程序。 kafka是一种服务。 ZooKeeper是一个在Kafka群集中运行的服务。 其他服务包括MapReduce，HDFS，YARN，Flume和Spark。角色是服务的一个特征。 broker在kafka服务中扮演角色。
+> ![](images/kafka1.png)
