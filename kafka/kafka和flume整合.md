@@ -62,3 +62,5 @@ tier1.sources  = source1
  tier1.sinks.sink1.channel = channel1
  tier1.sinks.sink1.batchSize = 20
 ```
+* 下表介绍了Kafka sink支持的参数。 必需的属性以粗体显示。
+![](images/kafka12.png)
