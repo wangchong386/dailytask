@@ -65,3 +65,9 @@ tier1.sources  = source1
 * 下表介绍了Kafka sink支持的参数。 必需的属性以粗体显示。
 ![](images/kafka12.png)
 * Kafka sink使用FlumeEvent头文件的topic和关键属性来确定在Kafka中发送事件的位置。 如果标题包含topic属性，则将该事件发送到指定的topic，覆盖已配置的topic。 如果标题包含密钥属性，则该密钥用于对主题中的事件进行分区。 具有相同密钥的事件将发送到同一个分区。 如果未指定密钥参数，事件将随机分布到分区。 使用这些属性来控制通过Flum source或intercepter(拦截器)发送事件的topics和partitions。
+
+### Kafka Channel
+> CDH5.3以及更高的包含channel对于flume,除了现有的memory和file channel，你也可以使用kafka channel：
+* 没有使用source，直接从kafka写到hadoop
+* 直接从Flume source写入Kafka，无需额外的缓冲(buffering)。
+* 作为任何source/sink组合的可靠且高可用性的channel。
