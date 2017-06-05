@@ -16,3 +16,8 @@ kafka可以提供的是：
 * kafka broker流程记录组成topic,topic是一类具有相同特征的的记录。生产者是一个外部程序发送记录到kafka topic,消费者是从Kafka群集接收主题流的外部进程。
 ![](images/kafka2.png)
 * broker在partitions中处理topic。 集群中一个broker上的partition是leader。 相同的partition在集群中的一个或多个其他broker作为副本进行镜像。 当leader off-line时，replica副本自动占据其位置，成为该topic的新leader。 in-sync replica(t同步副本)是与leader完全更新的副本。
+
+![](images/kafka3.png)
+
+* 每一个kafka集群中有一个broker扮演的是controller,controller负责管理partition和replicas(副本)的状态。它还执行管理任务，如重新分配分区。
+![](images/kafka4.png)
