@@ -1,7 +1,7 @@
 ## Using Kafka with Flume
 > In CDH 5.2 and higher, Flume contains a Kafka source and sink. Use these to stream data from Kafka to Hadoop or from any Flume source to Kafka.
 In CDH 5.7 and higher, the Flume connector to Kafka only works with Kafka 2.0 and higher.
-
+## kafka重要部分介绍，分为：source,sink,channel
 ### Kafka Source
 > 使用kafka source 将kafka topic中的数据传输到hadoop中。kafka可以与任何flume sink结合使用，可以方便的将kafka中的数据写入到hdfs，hbase和solr
 
