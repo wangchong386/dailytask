@@ -11,3 +11,29 @@ org.apache.kafka.common.errors.TimeoutException: Failed to update metadata after
 advertised.host.name=10.0.0.100
 advertised.port=9092
 ```
+### 2. java.io.FileNotFoundException: /data00/kafka/data/.lock (Permission denied)
+* 症状：
+```
+Fatal error during KafkaServerStartable startup. Prepare to shutdown
+java.io.FileNotFoundException: /data00/kafka/data/.lock (Permission denied)
+	at java.io.RandomAccessFile.open(Native Method)
+	at java.io.RandomAccessFile.<init>(RandomAccessFile.java:241)
+	at kafka.utils.FileLock.<init>(FileLock.scala:29)
+	at kafka.log.LogManager$$anonfun$lockLogDirs$1.apply(LogManager.scala:98)
+	at kafka.log.LogManager$$anonfun$lockLogDirs$1.apply(LogManager.scala:97)
+	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)
+	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)
+	at scala.collection.IndexedSeqOptimized$class.foreach(IndexedSeqOptimized.scala:33)
+	at scala.collection.mutable.WrappedArray.foreach(WrappedArray.scala:35)
+	at scala.collection.TraversableLike$class.map(TraversableLike.scala:234)
+	at scala.collection.AbstractTraversable.map(Traversable.scala:104)
+	at kafka.log.LogManager.lockLogDirs(LogManager.scala:97)
+	at kafka.log.LogManager.<init>(LogManager.scala:59)
+	at kafka.server.KafkaServer.createLogManager(KafkaServer.scala:611)
+	at kafka.server.KafkaServer.startup(KafkaServer.scala:183)
+	at kafka.server.KafkaServerStartable.startup(KafkaServerStartable.scala:37)
+	at kafka.Kafka$.main(Kafka.scala:67)
+	at com.cloudera.kafka.wrap.Kafka$.main(Kafka.scala:76)
+	at com.cloudera.kafka.wrap.Kafka.main(Kafka.scala)
+```
+* 原因：
