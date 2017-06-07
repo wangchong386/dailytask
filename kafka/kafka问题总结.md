@@ -37,3 +37,5 @@ java.io.FileNotFoundException: /data00/kafka/data/.lock (Permission denied)
 	at com.cloudera.kafka.wrap.Kafka.main(Kafka.scala)
 ```
 * 原因：
+在CDH添加了两台kafka机器，发现没有硬盘。运维后来将两台kafka机器磁盘已经加上，并做了raid。并已经在CDH上显示。但是数据目录没有检测到该磁盘路径。需要手动进行添加。最好是从原来的/var/local/kafka/data目录进行拷贝。但是拷贝之重新重启kafka broker.会报以上的错误，明显是权限的错误。
+原来是以前/kafka/data/.lock文件是kafka用户和kafka用户组的，我是用root账号进行复制的，所以出错。
