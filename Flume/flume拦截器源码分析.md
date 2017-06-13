@@ -76,7 +76,10 @@ public class HostInterceptor implements Interceptor
   }
   
   public void initialize() {}
+
 //注：public void initialize()运行前的初始化，一般不需要实现
+//注：public Event intercept(Event event)是处理单个event
+
   public Event intercept(Event event)
   {
     Map<String, String> headers = event.getHeaders();
@@ -89,7 +92,9 @@ public class HostInterceptor implements Interceptor
     return event;
   }
   
-  public List<Event> intercept(List<Event> events)
+//注：public List<Event> intercept(List<Event> events) 批量处理event，实际上是循环调用上面的public Event intercept(Event event)
+ 
+ public List<Event> intercept(List<Event> events)
   {
     for (Event event : events) {
       intercept(event);
@@ -98,9 +103,12 @@ public class HostInterceptor implements Interceptor
   }
   
   public void close() {}
-  
-  public static class Builder
-    implements Interceptor.Builder
+ 
+//注：public void close()可以做一些清理关闭
+   /**
+   * Builder which builds new instances of the HostInterceptor.
+   */
+  public static class Builder implements Interceptor.Builder
   {
     private boolean preserveExisting = HostInterceptor.Constants.PRESERVE_DFLT;
     private boolean useIP = HostInterceptor.Constants.USE_IP_DFLT;
