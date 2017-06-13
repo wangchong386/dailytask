@@ -21,7 +21,7 @@
 
 　　这些interceptor都比较简单我们选取HostInterceptor来讲解interceptor的原理，以及如何自己定制interceptor。
 
-　　这些interceptor都实现了org.apache.flume.interceptor.Interceptor接口，该接口有四个方法以及一个内部接口：
+### 这些interceptor都实现了org.apache.flume.interceptor.Interceptor接口，该接口有四个方法以及一个内部接口：
 
 　　1、public void initialize()运行前的初始化，一般不需要实现（上面的几个都没实现这个方法）；
 
@@ -33,7 +33,7 @@
 
 　　5、 public interface Builder extends Configurable 构建Interceptor对象，外部使用这个Builder来获取Interceptor对象。
 
-　　如果要自己定制，必须要完成上面的2,3,5。
+　　如果要自己定制，必须要完成上面的__2,3,5__
 
 　　下面，我们来看看org.apache.flume.interceptor.HostInterceptor，其全部代码如下：
 
