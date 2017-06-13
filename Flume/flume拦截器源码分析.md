@@ -35,7 +35,7 @@
 
 　　如果要自己定制，必须要完成上面的__2,3,5__
 
-　　下面，我们来看看org.apache.flume.interceptor.HostInterceptor，其全部代码如下：
+　　下面，我们来看看`org.apache.flume.interceptor.HostInterceptor`，其全部代码如下：
 
 ```
 package org.apache.flume.interceptor;
@@ -49,8 +49,7 @@ import org.apache.flume.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HostInterceptor
-  implements Interceptor
+public class HostInterceptor implements Interceptor
 {
   private static final Logger logger = LoggerFactory.getLogger(HostInterceptor.class);
   private final boolean preserveExisting;
@@ -77,7 +76,7 @@ public class HostInterceptor
   }
   
   public void initialize() {}
-  
+//注：public void initialize()运行前的初始化，一般不需要实现
   public Event intercept(Event event)
   {
     Map<String, String> headers = event.getHeaders();
