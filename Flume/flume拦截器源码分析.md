@@ -1,11 +1,11 @@
 ## Flume Interceptor拦截器源码分析
 有的时候希望通过Flume将读取的文件再细分存储，比如讲source的数据按照业务类型分开存储，具体一点比如类似：将source中web、wap、media等的内容分开存储；比如丢弃或修改一些数据。这时可以考虑使用拦截器Interceptor。
 
-　　flume通过拦截器实现修改和丢弃事件的功能。拦截器通过定义类继承org.apache.flume.interceptor.Interceptor接口来实现。用户可以通过该节点定义规则来修改或者丢弃事件。Flume支持链式拦截，通过在配置中指定构建的拦截器类的名称。在source的配置中，拦截器被指定为一个以空格为间隔的列表。拦截器按照指定的顺序调用。一个拦截器返回的事件列表被传递到链中的下一个拦截器。当一个拦截器要丢弃某些事件时，拦截器只需要在返回事件列表时不返回该事件即可。若拦截器要丢弃所有事件，则其返回一个空的事件列表即可。
+　　flume通过拦截器实现修改和丢弃事件的功能。拦截器通过定义类继承`org.apache.flume.interceptor.Interceptor`接口来实现。用户可以通过该节点定义规则来修改或者丢弃事件。Flume支持链式拦截，通过在配置中指定构建的拦截器类的名称。在source的配置中，拦截器被指定为一个以空格为间隔的列表。拦截器按照指定的顺序调用。一个拦截器返回的事件列表被传递到链中的下一个拦截器。当一个拦截器要丢弃某些事件时，拦截器只需要在返回事件列表时不返回该事件即可。若拦截器要丢弃所有事件，则其返回一个空的事件列表即可。
 
-　　先解释一下一个重要对象Event：event是flume传输的最小对象，从source获取数据后会先封装成event，然后将event发送到channel，sink从channel拿event消费。event由头(Map<String, String> headers)和身体(body)两部分组成：Headers部分是一个map，body部分可以是String或者byte[]等。其中body部分是真正存放数据的地方，headers部分用于本节所讲的interceptor。
+　　先解释一下一个重要对象Event：event是flume传输的最小对象，从source获取数据后会先封装成event，然后将event发送到channel，sink从channel拿event消费。event由头`(Map<String, String> headers)`和(body)两部分组成：Headers部分是一个map，body部分可以是String或者byte[]等。其中body部分是真正存放数据的地方，headers部分用于本节所讲的`interceptor`。
 
-　　Flume-NG自带拦截器有多种：
+### Flume-NG自带拦截器有多种：
 
 　　1、HostInterceptor：使用IP或者hostname拦截；
 
