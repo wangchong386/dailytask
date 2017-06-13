@@ -36,3 +36,99 @@
 　　如果要自己定制，必须要完成上面的2,3,5。
 
 　　下面，我们来看看org.apache.flume.interceptor.HostInterceptor，其全部代码如下：
+
+```
+package org.apache.flume.interceptor;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.List;
+import java.util.Map;
+import org.apache.flume.Context;
+import org.apache.flume.Event;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class HostInterceptor
+  implements Interceptor
+{
+  private static final Logger logger = LoggerFactory.getLogger(HostInterceptor.class);
+  private final boolean preserveExisting;
+  private final String header;
+  private String host = null;
+  
+  private HostInterceptor(boolean preserveExisting, boolean useIP, String header)
+  {
+    this.preserveExisting = preserveExisting;
+    this.header = header;
+    try
+    {
+      InetAddress addr = InetAddress.getLocalHost();
+      if (useIP) {
+        this.host = addr.getHostAddress();
+      } else {
+        this.host = addr.getCanonicalHostName();
+      }
+    }
+    catch (UnknownHostException e)
+    {
+      logger.warn("Could not get local host address. Exception follows.", e);
+    }
+  }
+  
+  public void initialize() {}
+  
+  public Event intercept(Event event)
+  {
+    Map<String, String> headers = event.getHeaders();
+    if ((this.preserveExisting) && (headers.containsKey(this.header))) {
+      return event;
+    }
+    if (this.host != null) {
+      headers.put(this.header, this.host);
+    }
+    return event;
+  }
+  
+  public List<Event> intercept(List<Event> events)
+  {
+    for (Event event : events) {
+      intercept(event);
+    }
+    return events;
+  }
+  
+  public void close() {}
+  
+  public static class Builder
+    implements Interceptor.Builder
+  {
+    private boolean preserveExisting = HostInterceptor.Constants.PRESERVE_DFLT;
+    private boolean useIP = HostInterceptor.Constants.USE_IP_DFLT;
+    private String header = HostInterceptor.Constants.HOST;
+    
+    public Interceptor build()
+    {
+      return new HostInterceptor(this.preserveExisting, this.useIP, this.header, null);
+    }
+    
+    public void configure(Context context)
+    {
+      this.preserveExisting = context.getBoolean(HostInterceptor.Constants.PRESERVE, Boolean.valueOf(HostInterceptor.Constants.PRESERVE_DFLT)).booleanValue();
+      this.useIP = context.getBoolean(HostInterceptor.Constants.USE_IP, Boolean.valueOf(HostInterceptor.Constants.USE_IP_DFLT)).booleanValue();
+      this.header = context.getString(HostInterceptor.Constants.HOST_HEADER, HostInterceptor.Constants.HOST);
+    }
+  }
+  
+  public static class Constants
+  {
+    public static String HOST = "host";
+    public static String PRESERVE = "preserveExisting";
+    public static boolean PRESERVE_DFLT = false;
+    public static String USE_IP = "useIP";
+    public static boolean USE_IP_DFLT = true;
+    public static String HOST_HEADER = "hostHeader";
+  }
+}
+
+```
