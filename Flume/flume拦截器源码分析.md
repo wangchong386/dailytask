@@ -172,6 +172,7 @@ public class HostInterceptor implements Interceptor
 
 ```
 
+
 ###　Constants类是参数类及默认的一些参数：
 
 　　Builder类是构造HostInterceptor对象的，它会首先通过configure(Context context)方法获取配置文件中interceptor的参数，然后方法build()用来返回一个HostInterceptor对象：
