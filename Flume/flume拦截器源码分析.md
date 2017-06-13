@@ -171,3 +171,29 @@ public class HostInterceptor implements Interceptor
 }
 
 ```
+
+###　Constants类是参数类及默认的一些参数：
+
+　　Builder类是构造HostInterceptor对象的，它会首先通过configure(Context context)方法获取配置文件中interceptor的参数，然后方法build()用来返回一个HostInterceptor对象：
+
+　　　　1、preserveExisting表示如果event的header中包含有本interceptor指定的header，是否要保留这个header,true则保留；
+
+　　　　2、useIP表示是否使用本机IP地址作为header的value，true则使用IP，默认是true;
+
+　　　　3、header是event的headers的key，默认是host。
+
+　　HostInterceptor：
+
+　　　　1、构造函数除了赋值外，还有就是根据useIP获取IP或者hostname；
+
+　　　　2、intercept(Event event)方法是设置event的header的地方，首先是获取headers对象，然后如果同时满足preserveExisting==true并且headers.containsKey(header)就直接返回event，否则设置headers:headers.put(header, host)。
+
+　　　　3、intercept(List<Event> events)方法是循环调用上述2的方法。
+
+ 
+
+显然其他几个Interceptor也就类似这样。在配置文件中配置source的interceptor时，如果是自己定制的interceptor，则需要对type参数赋值：完整类名+￥Builder,比如com.MyInterceptor$Builder即可。
+
+ 
+
+这样设置好headers后，就可以在后续的流转中通过selector实现细分存储。
