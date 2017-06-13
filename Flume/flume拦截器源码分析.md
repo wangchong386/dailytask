@@ -49,6 +49,38 @@ import org.apache.flume.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Simple Interceptor class that sets the host name or IP on all events
+ * that are intercepted.<p>
+ * The host header is named <code>host</code> and its format is either the FQDN
+ * or IP of the host on which this interceptor is run.
+ *
+ *
+ * Properties:<p>
+ *
+ *   preserveExisting: Whether to preserve an existing value for 'host'
+ *                     (default is false)<p>
+ *
+ *   useIP: Whether to use IP address or fully-qualified hostname for 'host'
+ *          header value (default is true)<p>
+ *
+ *  hostHeader: Specify the key to be used in the event header map for the
+ *          host name. (default is "host") <p>
+ *
+ * Sample config:<p>
+ *
+ * <code>
+ *   agent.sources.r1.channels = c1<p>
+ *   agent.sources.r1.type = SEQ<p>
+ *   agent.sources.r1.interceptors = i1<p>
+ *   agent.sources.r1.interceptors.i1.type = host<p>
+ *   agent.sources.r1.interceptors.i1.preserveExisting = true<p>
+ *   agent.sources.r1.interceptors.i1.useIP = false<p>
+ *   agent.sources.r1.interceptors.i1.hostHeader = hostname<p>
+ * </code>
+ *
+ */
+
 public class HostInterceptor implements Interceptor
 {
   private static final Logger logger = LoggerFactory.getLogger(HostInterceptor.class);
