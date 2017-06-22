@@ -1,5 +1,5 @@
-## build Artifacts时报错Java.lang.outofmemoryerror
-> 主要介绍build Artifacts时报错Java.lang.outofmemoryerror
+## build Artifacts时报错outofmemoryerror
+> 主要介绍build Artifacts时报错outofmemoryerror
 ## 现象1：build Artifacts时报错Java.lang.outofmemoryerror
 ![](images/outofmemory1.png)
 
