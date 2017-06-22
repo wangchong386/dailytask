@@ -276,4 +276,5 @@ deleting: META-INF/ECLIPSEF.RSA
 ```
 * 再次执行成功
 
-![](images/idea_spark15.png)
+![](images/idea_spark16.png)
+![](images/idea_spark17.png)
