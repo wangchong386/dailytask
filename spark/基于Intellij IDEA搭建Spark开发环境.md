@@ -118,3 +118,14 @@ pom.xml引入依赖(spark依赖、打包插件等等)
 </project>
 
 ```
+* maven依赖关系
+> Similar to Spark, Spark Streaming is available through Maven Central. To write your own Spark Streaming program, you will have to add the following dependency to your SBT or Maven project.
+
+[](http://spark.apache.org/docs/1.5.0/streaming-programming-guide.html#linking)
+```
+<dependency>
+    <groupId>org.apache.spark</groupId>
+    <artifactId>spark-streaming_2.10</artifactId>
+    <version>1.5.0</version>
+</dependency>
+```
