@@ -181,7 +181,10 @@ File --> Project Structure
 ![](images/idea_spark12.png)
 因为每台机器都安装spark,scala，所以可以将与scala,spark相关的jar包删除掉
 ![](images/idea_spark13.png)
+
 然后OK
 Build --> Build Artifacts --> Build
+
 ![](images/idea_spark14.png)
+
 所以会在out目录下看到该jar包
