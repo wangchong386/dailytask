@@ -129,3 +129,7 @@ pom.xml引入依赖(spark依赖、打包插件等等)
     <version>1.5.0</version>
 </dependency>
 ```
+* 为了养成好的开发习惯
+![](images/idea_spark8.png)
+Mark directory之后才可以生效
+![](images/idea_spark9.png)
