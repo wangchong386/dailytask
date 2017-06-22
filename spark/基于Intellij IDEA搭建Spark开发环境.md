@@ -133,3 +133,55 @@ pom.xml引入依赖(spark依赖、打包插件等等)
 ![](images/idea_spark8.png)
 Mark directory之后才可以生效
 ![](images/idea_spark9.png)
+
+## 建立第一个MyScalaWordCount.scala
+```
+package sparkstreaming
+
+import org.apache.spark.{SparkConf, SparkContext}
+
+/**
+  * Created by wangchong on 2017/6/22.
+  */
+object MyScalaWordCount {
+  def main(args: Array[String]): Unit = {
+    //参数检查
+    if (args.length < 2) {
+      System.err.println("Usage: MyScalaWordCout <input> <output> ")
+      System.exit(1)
+    }
+    //获取参数
+    val input = args(0)
+    val output = args(1)
+    //创建scala版本的SparkContext
+    val conf = new SparkConf().setAppName("MyScalaWordCout ")
+    val sc = new SparkContext(conf)
+    //读取数据
+    val lines = sc.textFile(input)
+    //进行相关计算
+    val resultRdd = lines.flatMap(_.split(" ")).map((_, 1)).reduceByKey(_ + _)
+    //保存结果
+    resultRdd.saveAsTextFile(output)
+    sc.stop()
+  }
+}
+```
+
+## 打成jar包，然后上传到服务器中运行第一个spark程序
+* 使用maven打包（强烈推荐，快捷又迅速）
+![](images/idea_spark10.png)
+```
+mvn clean package
+
+mvn package
+```
+* Artifacts方式进行打成jar包
+File --> Project Structure
+![](images/idea_spark11.png)
+![](images/idea_spark12.png)
+因为每台机器都安装spark,scala，所以可以将与scala,spark相关的jar包删除掉
+![](images/idea_spark13.png)
+然后OK
+Build --> Build Artifacts --> Build
+![](images/idea_spark14.png)
+所以会在out目录下看到该jar包
