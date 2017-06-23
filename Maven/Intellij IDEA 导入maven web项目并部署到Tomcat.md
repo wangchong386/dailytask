@@ -5,4 +5,29 @@
 ## 导入项目
 * File -> New -> Project from Existing Source
 
-![](images/maven——web1.png)
+![](images/maven_web1.png)
+
+* 选择maven项目所在的文件夹
+![](images/maven_web2.png)
+* Import project from external model -> Maven
+![](images/maven_web3.png)
+
+* 使用默认设置, 然后一直Next, 直到项目创建成功.
+
+## 配置项目
+
+* 我们打开applicationContext.xml 会提示 Create Spring facet, 我们点击它, 增加对Spring 的支持
+![](images/maven_web4.png)
+* 点击右侧的+ 号选择Spring 的配置文件
+![](images/maven_web5.png)
+## 添加Web支持
+* File -> Project Structure… -> Modules -> 选中项目(不是Spring) , 然后点击上方的+号
+![](images/maven_web6.png)
+* 选择 Web
+![](images/maven_web7.png)
+* 然后我们会看到在下方会提示'Web' Facet resources are not included in an artifact, 我们点击Create Artifact新建一个
+![](images/maven_web8.png)
+* 然后我们会跳转到Artifacts选项中, 注意右侧Available Elements , 这些是Spring的依赖包, 我们在这些依赖包上双击, 就可以添加到WEB-INF的lib文件夹中, 这样部署到Tomcat上程序才可以正常运行.
+![](images/maven_web9.png)
+* 下图是点击之后的效果, 然后点击OK即可
+![](images/maven_web10.png)
