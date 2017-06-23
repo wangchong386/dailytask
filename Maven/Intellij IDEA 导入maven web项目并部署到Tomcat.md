@@ -31,3 +31,6 @@
 ![](images/maven_web9.png)
 * 下图是点击之后的效果, 然后点击OK即可
 ![](images/maven_web10.png)
+
+
+http://blog.zhangjikai.com/2015/12/26/%E3%80%90%E8%BD%AF%E4%BB%B6%E3%80%91Intellij-IDEA-14-%E5%AF%BC%E5%85%A5maven-web%E9%A1%B9%E7%9B%AE%E5%B9%B6%E5%8F%91%E5%B8%83%E5%88%B0Tomcat/
