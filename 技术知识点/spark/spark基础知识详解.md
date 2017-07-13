@@ -140,5 +140,7 @@ spark SQL
 * 2、吞吐和容错
 * 3、多种开发范式混用，Streaming + SQL, Streaming +MLlib
 * 4、利用Spark内存pipeline计算
+
 劣势：
-微批处理模式，准实时
+
+* 微批处理模式，准实时
