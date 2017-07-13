@@ -105,31 +105,40 @@ Spark Streaming的基本原理是将输入数据流以时间片(秒级)为单位
 * join等值连接(内连接)，只有某个值在m和n中同时存在时。
 * left outer join 左外连接，左边表中的值无论是否在b中存在时，都输出;右边表中的值，只有在左边表中存在时才输出。
 * right outer join 和 left outer join 相反。
-Transformation具体内容
-reduceByKey(func, [numTasks]) : 在一个(K，V)对的数据集上使用，返回一个(K，V)对的数据集，key相同的值，都被使用指定的reduce函数聚合到一起。和groupbykey类似，任务的个数是可以通过第二个可选参数来配置的。
-join(otherDataset, [numTasks]) :在类型为(K,V)和(K,W)类型的数据集上调用，返回一个(K,(V,W))对，每个key中的所有元素都在一起的数据集
-groupWith(otherDataset, [numTasks]) : 在类型为(K,V)和(K,W)类型的数据集上调用，返回一个数据集，组成元素为(K, Seq[V], Seq[W]) Tuples。这个操作在其它框架，称为CoGroup
-cartesian(otherDataset) : 笛卡尔积。但在数据集T和U上调用时，返回一个(T，U)对的数据集，所有元素交互进行笛卡尔积。
-flatMap(func) :类似于map，但是每一个输入元素，会被映射为0到多个输出元素(因此，func函数的返回值是一个Seq，而不是单一元素)
-Case 1将一个list乘方后输出
+#### Transformation具体内容
+* reduceByKey(func, [numTasks]) : 在一个(K，V)对的数据集上使用，返回一个(K，V)对的数据集，key相同的值，都被使用指定的reduce函数聚合到一起。和groupbykey类似，任务的个数是可以通过第二个可选参数来配置的。
+* join(otherDataset, [numTasks]) :在类型为(K,V)和(K,W)类型的数据集上调用，返回一个(K,(V,W))对，每个key中的所有元素都在一起的数据集
+* groupWith(otherDataset, [numTasks]) : 在类型为(K,V)和(K,W)类型的数据集上调用，返回一个数据集，组成元素为(K, Seq[V], Seq[W]) Tuples。这个操作在其它框架，称为CoGroup
+* cartesian(otherDataset) : 笛卡尔积。但在数据集T和U上调用时，返回一个(T，U)对的数据集，所有元素交互进行笛卡尔积。
+* flatMap(func) :类似于map，但是每一个输入元素，会被映射为0到多个输出元素(因此，func函数的返回值是一个Seq，而不是单一元素)
+
+__Case 1将一个list乘方后输出__
+```
 val input = sc.parallelize(List(1,2,3,4))
 val result = input.map(x => x*x)
 println(result.collect().mkString(","))
-Case 2 wordcount
+```
+__Case 2 wordcount__
+```
 val textFile = sc.textFile(args(1))
 val result = textFile.flatMap(line => line.split("\\s+")).map(word => (word, 1)).reduceByKey(_ + _)
 println(result.collect().mkString(","))
 result.saveAsTextFile(args(2))
-Case 3 打印rdd的元素
+```
+__Case 3 打印rdd的元素__
+```
 rdd.foreach(println) 或者 rdd.map(println).
 rdd.collect().foreach(println)
 rdd.take(100).foreach(println)
+```
+
 spark SQL
-Spark Streaming优劣
+#### Spark Streaming优劣
 优势：
-1、统一的开发接口
-2、吞吐和容错
-3、多种开发范式混用，Streaming + SQL, Streaming +MLlib
-4、利用Spark内存pipeline计算
+
+* 1、统一的开发接口
+* 2、吞吐和容错
+* 3、多种开发范式混用，Streaming + SQL, Streaming +MLlib
+* 4、利用Spark内存pipeline计算
 劣势：
 微批处理模式，准实时
