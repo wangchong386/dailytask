@@ -28,3 +28,68 @@ nohup /usr/local/jdk1.7.0_55/bin/java -cp "lib/*" com.dhgate.appsflyerlog.HttpSe
 echo "run in the background"
 
 ```
+### 使用pig脚本将其转化到hdfs中
+```
+#!/bin/sh
+
+#=============================================================================
+# 获取当前时间的上一个小时，如果当前是00点则取前一天的23点数据
+# appsflyerlog.2015-11-26_06.log
+#=============================================================================
+if  [ ! -n "$1" ] ;then
+    etl_date=$(date '+%Y-%m-%d')
+    hour=$(date -d "1 hour ago" '+%H')
+    if [ "$hour" = "23" ]; then
+        etl_date=$(date -d "-1 day $etl_date" '+%Y-%m-%d')
+    fi
+    echo $etl_date $hour
+else
+    etl_date=$1
+    hour=$2
+fi
+
+dt=$(date -d "$etl_date" "+%Y-%m-%d")
+
+# 日志路径
+readonly log_file_path='/data/track/appsflyerlog'
+# HDFS路径
+readonly hdfs_table_path='/dw/ods/ods_log_appsflyer'
+# log日志集中存放
+readonly log_file_local='/data/appsflyerlog'
+
+# 日志文件名称
+# 例如 appsflyerlog.2015-11-26_06.log
+log_file_name="appsflyerlog.${etl_date}_${hour}.log"
+
+# Load前清理HDFS历史数据
+target_hdfs_path="$hdfs_table_path/dt=$dt/hour=$hour"
+hadoop fs -rm -r    $target_hdfs_path
+hadoop fs -mkdir -p $target_hdfs_path
+
+#=============================================================================
+# 将log文件集中到一台server后转存到hive表分区
+#=============================================================================
+cat <<EOF | xargs -I {} scp {}:"$log_file_path/$log_file_name" "$log_file_local/{}_$log_file_name"
+appsflyer1
+EOF
+
+hive -hiveconf dt="$dt" \
+     -hiveconf hour="$hour" \
+     -hiveconf log_file_local="$log_file_local" \
+     -hiveconf log_file_name="$log_file_name" \
+     -f /dw/ods/log/hsql/ods_log_appsflyer.sql
+
+```
+### ETL清洗转换并生成报表提供给业务人员
+* /dw/ods/log/hsql/ods_log_appsflyer.sql
+
+```
+set hive.exec.compress.output=true;
+set mapred.output.compress=true;
+set mapred.output.compression.codec=org.apache.hadoop.io.compress.GzipCodec;
+LOAD DATA local INPATH
+    '${hiveconf:log_file_local}/*${hiveconf:log_file_name}'
+    OVERWRITE INTO TABLE ods_log_appsflyer
+    PARTITION (dt='${hiveconf:dt}',hour='${hiveconf:hour}');
+
+```
