@@ -46,5 +46,5 @@ Flume日志采集：
 
 ### 数据应用：
 * 数据智囊。
-* Report日常报表
+* Report日常报表等
 * 流量快车、rpt、vas、ppc等广告
