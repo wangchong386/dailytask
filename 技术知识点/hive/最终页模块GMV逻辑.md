@@ -60,3 +60,84 @@ vid 或者 buyerid    item_code
 * f)当天或者第二天完成confirm
       * 订单在下单当天完成confim的占92%；
       * 当天或者第二天完成confirm的占96%
+
+#### 四、sql举例
+* www首页右侧you may like位置的GMV（推荐位）
+* URL示例：
+http://www.dhgate.com/product/2013-red-wedding-dresses-lace-tulle-applique/156892617.html?recinfo=22,101,1#hp1507_recm-1-5|null:101:1177089674
+* 备注：这个#码是5.31号修改的，所以这样跑没有数据，sql仅是举例
+非推荐的去掉rec表和uuid的限制
+
+```
+select t.dt, count(distinct t.rfx_no) orders, sum(t.prod_gmv) gmv
+  from (select distinct item.vid,
+                        item.item_code,
+                        item.dt,
+                        m.rfx_no,
+                        m.started_date,
+                        m.prod_gmv
+          from (select distinct v.vid,
+                                v.item_code,
+                                v.dt,
+                                from_unixtime(cast(vt / 1000 as bigint),
+                                              'yyyy-MM-dd HH:mm:ss') vt,
+                                v.user_id,
+                                uuid
+                  from ods_log_pageview v
+                 where v.dt = '2016-05-18'
+                   and dt <= '2016-05-24'
+                   and v.track_id = 'Item_U0001'
+                   and v.site = 'www'
+                   and vid is not null
+                   and vid <> ''
+                   and uuid is not null
+                   and uuid <> ''
+                   and click_position = 'hp1507_recm') item
+         inner join (select distinct s.uuid, s.vid, dt
+                      from ods_log_rec_s s
+                     where s.dt = '2016-05-18'
+                       and dt <= '2016-05-24'
+                       and uuid is not null
+                       and vid is not null
+                       and uuid <> ''
+                       and vid <> ''
+                       and site = 'www') rec
+            on item.vid = rec.vid
+           and item.uuid = rec.uuid
+           and item.dt = rec.dt
+         inner join (select a.rfx_no,
+                           item_code,
+                           prod_gmv,
+                           c.vid,
+                           a.buyer_id,
+                           a.started_date
+                      from (select rfx_no, started_date, buyer_id
+                              from mds_rfx_info
+                             where dt = '2016-05-25'
+                               and to_date(started_date) = '2016-05-18'
+                               and to_date(started_date) <= '2016-05-24'
+                               and confirm_date is not null
+                               and confirm_date <> ''
+                               and datediff(to_date(confirm_date),
+                                            to_date(started_date)) <= 1
+                               and (visit_detail_info not like 'mobile_p%' or
+                                   visit_detail_info is null)) a
+                     inner join (select rfx_no,
+                                       item_code,
+                                       rfx_prod_id,
+                                       prod_gmv
+                                  from mds_rfx_prod
+                                 where dt = '2016-05-25') b
+                        on a.rfx_no = b.rfx_no
+                     inner join (select rfx_prod_ext_id, vid, rfx_no
+                                  from ods_rfx_prod_ext
+                                 where dt = '2016-05-25') c
+                        on b.rfx_prod_id = c.rfx_prod_ext_id
+                       and b.rfx_no = c.rfx_no) m
+            on item.item_code = m.item_code
+         where (item.vid = m.vid or item.user_id = m.buyer_id)
+           and m.started_date > item.vt
+           and datediff(to_date(m.started_date), to_date(item.vt)) = 0) t
+ group by t.dt
+ order by dt;
+```
