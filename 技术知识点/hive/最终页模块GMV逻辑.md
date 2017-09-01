@@ -69,6 +69,7 @@ http://www.dhgate.com/product/2013-red-wedding-dresses-lace-tulle-applique/15689
 非推荐的去掉rec表和uuid的限制
 
 ```
+
 select t.dt, count(distinct t.rfx_no) orders, sum(t.prod_gmv) gmv
   from (select distinct item.vid,
                         item.item_code,
@@ -140,4 +141,5 @@ select t.dt, count(distinct t.rfx_no) orders, sum(t.prod_gmv) gmv
            and datediff(to_date(m.started_date), to_date(item.vt)) = 0) t
  group by t.dt
  order by dt;
+
 ```
