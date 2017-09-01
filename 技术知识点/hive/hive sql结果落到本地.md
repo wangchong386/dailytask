@@ -1,5 +1,5 @@
 ## hive sql开发
-### 如何将hive sql执行结果落到本地目录，并进行压缩：
+### 1. 如何将hive sql执行结果落到本地目录，并进行压缩：
 ```
 #!/bin/sh
 ##装载conf文件
@@ -36,3 +36,5 @@ rm "${data_dir}/".*.crc 2> /dev/null
 write_log "[INFO]" "$stab" "etl_end" "$etl_date" "etl数据加工完成"
 
 ```
+
+
