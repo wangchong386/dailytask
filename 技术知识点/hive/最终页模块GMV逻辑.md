@@ -46,3 +46,4 @@ vid 或者 buyerid    item_code
 
 #### 三、一些表和数据说明
 a)最终页#tracking的第一段在click_position字段，具体参考下面的整理
+![](images/hivesql2.png)
