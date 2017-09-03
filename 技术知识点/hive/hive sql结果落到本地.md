@@ -134,6 +134,9 @@ $v_sql
 !
 
 
-sqoop export --connect jdbc:mysql://172.21.100.101:3316/reportdb --username username --password passwd --export-dir /dw/sds/table_name/dt=$etl_date/0* --table table_name --input-fields-terminated-by '\t' --input-null-string '\\N' --input-null-non-string '\\N' -m 1
+sqoop export --connect jdbc:mysql://172.21.100.101:3316/reportdb \
+--username username --password passwd --export-dir /dw/sds/table_name/dt=$etl_date/0* \
+--table table_name --input-fields-terminated-by '\t' --input-null-string '\\N' \
+--input-null-non-string '\\N' -m 1
 
 ```
