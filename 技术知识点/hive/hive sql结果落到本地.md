@@ -103,7 +103,7 @@ exit 0
 
 ```
 
-### hive sqoop到关系型数据库
+### 3. hive sqoop到关系型数据库
 ```
 #!/bin/sh
 
