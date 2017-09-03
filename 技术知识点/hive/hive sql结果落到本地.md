@@ -102,3 +102,38 @@ fi
 exit 0
 
 ```
+
+### hive sqoop到关系型数据库
+```
+#!/bin/sh
+
+##装载config文件
+. /dw/config/hive_config.conf
+##表名##
+##获取ETL运行日期
+if  [ ! -n "$1" ] ;then
+    run_date
+else
+    run_date $1
+fi
+echo $etl_date
+
+
+v_sql="
+    set sql_safe_updates = 0;
+    use reportdb;
+    delete from table_name where report_date='$etl_date';
+    commit;
+    set sql_safe_updates = 1;
+"
+ echo $v_sql
+
+# execute sql stat
+mysql -ureport -h172.21.100.101 -P3316 -ppasswd<<!
+$v_sql
+!
+
+
+sqoop export --connect jdbc:mysql://172.21.100.101:3316/reportdb --username username --password passwd --export-dir /dw/sds/table_name/dt=$etl_date/0* --table table_name --input-fields-terminated-by '\t' --input-null-string '\\N' --input-null-non-string '\\N' -m 1
+
+```
