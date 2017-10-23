@@ -4,7 +4,7 @@
 
 
 * 卸载
-sudo rm -fr /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
-sudo rm -fr /Library/PreferencesPanes/JavaControlPanel.prefpane
-cd /Library/Java/JavaVirtualMachines
-rm -rf jdk1.7.0_06.jdk
+    * sudo rm -fr /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
+    * sudo rm -fr /Library/PreferencesPanes/JavaControlPanel.prefpane
+    * cd /Library/Java/JavaVirtualMachines
+    * rm -rf jdk1.7.0_06.jdk
