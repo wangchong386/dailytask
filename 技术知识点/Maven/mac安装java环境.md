@@ -14,6 +14,7 @@
      * JAVA_HOME = "/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk"
      * CLASS_PATH="$JAVA_HOME/lib"
      * PATH=".;$PATH:$JAVA_HOME/bin"
+     
   要想马上生效，输入 source /etc/profile
 * 验证是否配置成功
   echo $JAVA_HOME
