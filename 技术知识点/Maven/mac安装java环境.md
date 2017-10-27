@@ -11,9 +11,9 @@
   vim /etc/profile(该文件为readonly,无读写权限，需要使用sudo chmod赋予读写权限。就可以正常编辑了)
   [sudo chmod a+rwx /etc/profile]
   在文件尾部，添加java路径
-  JAVA_HOME = "/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk"
-  CLASS_PATH="$JAVA_HOME/lib"
-  PATH=".;$PATH:$JAVA_HOME/bin"
+     * JAVA_HOME = "/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk"
+     * CLASS_PATH="$JAVA_HOME/lib"
+     * PATH=".;$PATH:$JAVA_HOME/bin"
   要想马上生效，输入 source /etc/profile
 * 验证是否配置成功
   echo $JAVA_HOME
