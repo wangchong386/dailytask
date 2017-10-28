@@ -29,8 +29,9 @@
  ## 2.安装IntelliJ IDEA
 * download IntelliJ IDEA
  
- download link:https://www.jetbrains.com/idea/download/#section=mac
+  download link:https://www.jetbrains.com/idea/download/#section=mac
  
- ---> you can choose to download: Ultimate or Community version
-* Install Community version
- Install cracked version Link : http://www.sdifen.com/intellijidea15.html
+  ---> you can choose to download: Ultimate or Community version
+* Commonly Install Community version
+
+  Install cracked version Link : http://www.sdifen.com/intellijidea15.html
