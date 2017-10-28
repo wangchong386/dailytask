@@ -34,4 +34,5 @@
   ---> you can choose to download: Ultimate or Community version
 * Commonly Install Community version
 
-  Install cracked version Link : http://www.sdifen.com/intellijidea15.html
+  Install cracked version Link : http://www.sdifen.com/intellijidea15.html .
+  And I can also refer to Link:http://blog.csdn.net/testcs_dn/article/details/51771422
