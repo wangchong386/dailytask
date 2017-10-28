@@ -25,3 +25,12 @@
     * sudo rm -fr /Library/PreferencesPanes/JavaControlPanel.prefpane
     * cd /Library/Java/JavaVirtualMachines
     * rm -rf jdk1.7.0_06.jdk
+    
+ ## 2.安装IntelliJ IDEA
+* download IntelliJ IDEA
+ 
+ download link:https://www.jetbrains.com/idea/download/#section=mac
+ 
+ ---> you can choose to download: Ultimate or Community version
+* Install Community version
+ Install cracked version Link : http://www.sdifen.com/intellijidea15.html
