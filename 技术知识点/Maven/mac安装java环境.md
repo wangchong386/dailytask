@@ -37,3 +37,21 @@
      * Install cracked version Link : http://www.sdifen.com/intellijidea15.html
   
      * And I can also refer to Link:http://blog.csdn.net/testcs_dn/article/details/51771422
+## 3. configure maven
+* download maven link:http://maven.apache.org/download.cgi
+* configure environment variable:
+     * vim /etc/profile, And add the following code
+     * export M2_HOME=/Users/wangchong/software/maven/apache-maven-3.5.2
+     * export PATH=$PATH:$M2_HOME/bin
+* Check if the installation is correct？
+```
+wangchong$ echo $M2_HOME
+/Users/wangchong/software/maven/apache-maven-3.5.2
+wangchong$ mvn -version
+Apache Maven 3.5.2 (138edd61fd100ec658bfa2d307c43b76940a5d7d; 2017-10-18T15:58:13+08:00)
+Maven home: /Users/wangchong09/software/maven/apache-maven-3.5.2
+Java version: 1.7.0_80, vendor: Oracle Corporation
+Java home: /Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home/jre
+Default locale: zh_CN, platform encoding: UTF-8
+OS name: "mac os x", version: "10.11.6", arch: "x86_64", family: "mac"
+```
