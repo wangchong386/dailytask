@@ -20,7 +20,7 @@
   echo $JAVA_HOME
   /Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk
 
-* 卸载
+* uninstall:
     * sudo rm -fr /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
     * sudo rm -fr /Library/PreferencesPanes/JavaControlPanel.prefpane
     * cd /Library/Java/JavaVirtualMachines
