@@ -54,5 +54,4 @@ Java version: 1.7.0_80, vendor: Oracle Corporation
 Java home: /Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home/jre
 Default locale: zh_CN, platform encoding: UTF-8
 OS name: "mac os x", version: "10.11.6", arch: "x86_64", family: "mac"
-
 ```
