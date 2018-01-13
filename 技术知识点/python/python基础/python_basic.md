@@ -29,3 +29,26 @@
 
 ### list
 Python内置的一种数据类型是列表：list。list是一种有序的集合，可以随时添加和删除其中的元素。
+```
+classmates = ['Michael', 'Bob', 'Tracy']
+print(classmates)
+print(len(classmates))
+print (classmates[1])
+>>>['Michael', 'Bob', 'Tracy']
+3
+Bob
+```
+当索引超出了范围时，Python会报一个IndexError错误，所以，要确保索引不要越界，记得最后一个元素的索引是len(classmates) - 1。
+
+如果要取最后一个元素，除了计算索引位置外，还可以用-1做索引，直接获取最后一个元素：
+```
+>>> classmates[-1]
+'Tracy'
+```
+* list是一个可变的有序表，所以，可以往list中追加元素到末尾：
+```
+print(classmates.append('Adam'))
+print(classmates)
+>>>
+['Michael', 'Bob', 'Tracy', 'Adam']
+```
