@@ -52,3 +52,28 @@ print(classmates)
 >>>
 ['Michael', 'Bob', 'Tracy', 'Adam']
 ```
+* 也可以把元素插入到指定的位置，比如索引号为__1__的位置：
+```
+>>> classmates.insert(1, 'Jack')
+>>> classmates
+['Michael', 'Jack', 'Bob', 'Tracy', 'Adam']
+```
+* 删除list末尾的元素
+```
+>>> classmates.pop()
+'Adam'
+>>> classmates
+['Michael', 'Jack', 'Bob', 'Tracy']
+```
+* 要删除指定位置的元素，用pop(i)方法，其中i是索引位置：
+```
+>>> classmates.pop(2)
+'Bob'
+```
+* 要把某个元素替换成别的元素，可以直接赋值给对应的索引位置：
+
+```
+>>> classmates[1] = 'Sarah'
+>>> print(classmates)
+['Michael', 'Sarah', 'Tracy']
+```
