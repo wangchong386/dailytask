@@ -77,3 +77,16 @@ print(classmates)
 >>> print(classmates)
 ['Michael', 'Sarah', 'Tracy']
 ```
+* list元素也可以是另一个list，比如：
+```
+>>> s = ['python', 'java', ['asp', 'php'], 'scheme']
+>>> len(s)
+4
+```
+
+### tuple
+* 零
+### tuple
+* 另一种有序列表叫元组：tuple. tuple和list非常类似，但是tuple一旦初始化就不能修改
+* 不可变的tuple有什么意义？因为tuple不可变，所以代码更安全。如果可能，能用tuple代替list就尽量用tuple。
+tuple的陷阱：当你定义一个tuple时，在定义的时候，tuple的元素就必须被确定下来
