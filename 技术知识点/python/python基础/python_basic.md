@@ -89,3 +89,103 @@ print(classmates)
 * 不可变的tuple有什么意义？因为tuple不可变，所以代码更安全。如果可能，能用tuple代替list就尽量用tuple。
 tuple的陷阱：当你定义一个tuple时，在定义的时候，tuple的元素就必须被确定下来
 
+### 条件判断
+```
+age = 20
+if age >= 18:
+    print('your age is',age)
+    print('adult')
+>>> ('your age is', 20)
+adult
+```
+* 根据Python的缩进规则，如果if语句判断是True，就把缩进的两行print语句执行了，否则，什么也不做。
+```
+Python语言是一款对缩进非常敏感的语言，给很多初学者带来了困惑，即便是很有经验的Python程序员，也可能陷入陷阱当中。最常见的情况是tab和空格的混用会导致错误，或者缩进不对，而这是用肉眼无法分别的。
+
+在编译时会出现这样的错IndentationError:expected an indented block说明此处需要缩进，你只要在出现错误的那一行，按空格或Tab（但不能混用）键缩进就行。
+
+往往有的人会疑问：我根本就没缩进怎么还是错，不对，该缩进的地方就要缩进，不缩进反而会出错，，比如：
+
+if xxxxxx：
+
+（空格）xxxxx
+
+或者
+
+def xxxxxx：
+
+（空格）xxxxx
+
+还有
+
+for xxxxxx：
+
+（空格）xxxxx
+
+一句话 有冒号的下一行往往要缩进，该缩进就缩进
+```
+
+* 也可以给if添加一个else语句，意思是，如果if判断是False，不要执行if的内容，去把else执行了：
+```
+age = 3
+if age >= 18:
+    print('your age is', age)
+    print('adult')
+else:
+    print('your age is', age)
+    print('teenager')
+```
+* 注意不要少写了冒号`:`。
+* elif是else if的缩写，完全可以有多个elif，所以if语句的完整形式就是：
+```
+if <条件判断1>:
+    <执行1>
+elif <条件判断2>:
+    <执行2>
+elif <条件判断3>:
+    <执行3>
+else:
+    <执行4>
+```
+* `if`语句执行有个特点，它是从上往下判断，如果在某个判断上是`True`，把该判断对应的语句执行后，就忽略掉剩下的`elif`和`else`
+* `if`判断条件还可以简写，比如写：
+```
+if x:
+    print('True')
+```
+* 只要`x`是非零数值、非空字符串、非空`list`等，就判断为`True`，否则为`False`。
+
+### 再议 input
+* 最后看一个有问题的条件判断。很多同学会用`input()`读取用户的输入，这样可以自己输入，程序运行得更有意思：
+```
+birth = input('birth: ')
+if birth < 2000:
+    print('00前')
+else:
+    print('00后')
+```
+## 循环
+* Python的循环有两种，一种是for...in循环，依次把list或tuple中的每个元素迭代出来，看例子：
+```
+names = ['Michael', 'Bob', 'Tracy']
+for name in names:
+    print(name)
+>>> Michael
+Bob
+Tracy
+```
+* 如果要计算1-100的整数之和，从1写到100有点困难，幸好Python提供一个range()函数，可以生成一个整数序列，再通过list()函数可以转换为list。比如range(5)生成的序列是从0开始小于5的整数：
+```
+>>> list(range(5))
+[0, 1, 2, 3, 4]
+```
+* 第二种循环是while循环，只要条件满足，就不断循环，条件不满足时退出循环。比如我们要计算100以内所有奇数之和，可以用while循环实现:
+```
+sum = 0
+n = 99
+while n > 0:
+    sum = sum + n
+    n = n - 2
+print(sum)
+```
+* 在循环内部变量n不断自减，直到变为-1时，不再满足while条件，循环退出
