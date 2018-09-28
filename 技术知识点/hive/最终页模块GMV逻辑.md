@@ -64,7 +64,7 @@ vid 或者 buyerid    item_code
 #### 四、sql举例
 * www首页右侧you may like位置的GMV（推荐位）
 * URL示例：
-http://www.dhgate.com/product/2013-red-wedding-dresses-lace-tulle-applique/156892617.html?recinfo=22,101,1#hp1507_recm-1-5|null:101:1177089674
+http://www.mmmm.com/product/2013-red-wedding-dresses-lace-tulle-applique/156892617.html?recinfo=22,101,1#hp1507_recm-1-5|null:101:1177089674
 * 备注：这个#码是5.31号修改的，所以这样跑没有数据，sql仅是举例
 非推荐的去掉rec表和uuid的限制
 
