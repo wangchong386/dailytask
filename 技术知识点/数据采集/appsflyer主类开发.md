@@ -962,7 +962,7 @@ public class HttpServer {
 
 * HttpServerHandler
 ```
-package com.dhgate.appsflyerlog;
+package com.mmmm.appsflyerlog;
 
 import java.util.List;
 
@@ -984,9 +984,9 @@ import io.netty.handler.codec.http.HttpVersion;
 import io.netty.util.CharsetUtil;
 
 import com.alibaba.fastjson.JSON;
-import com.dhgate.appsflyerlog.model.AppsFlyerLog;
-import com.dhgate.appsflyerlog.service.LoggingService;
-import com.dhgate.appsflyerlog.service.impl.LoggingServiceImpl;
+import com.mmmm.appsflyerlog.model.AppsFlyerLog;
+import com.mmmm.appsflyerlog.service.LoggingService;
+import com.mmmm.appsflyerlog.service.impl.LoggingServiceImpl;
 
 public class HttpServerHandler extends SimpleChannelInboundHandler<Object> {
 	private Logger runLogger = LoggerFactory
